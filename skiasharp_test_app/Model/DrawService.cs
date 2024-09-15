@@ -1,12 +1,13 @@
 ﻿using System.Windows.Input;
 using SkiaSharp;
+using skiasharp_test_app.Model.Shapes;
 using SkiaSharp.Views.WPF;
 
 namespace skiasharp_test_app.Model;
 
 public class DrawService
 {
-    private List<Rect> _rectangles = TestData.GetRectangles();
+    private List<Shape> _shapes = TestData.GetShapes();
     
     public DrawService(ToolTipService toolTipService)
     {
@@ -30,14 +31,9 @@ public class DrawService
     {
         Canvas = canvas;
         Canvas.Clear(new SKColor(130, 130, 130));
-        foreach (var shape in _rectangles)
+        foreach (var shape in _shapes)
         {
-            Canvas.DrawRect(
-                shape.Point.X, 
-                shape.Point.Y, 
-                shape.Width, 
-                shape.Height, 
-                shape.Paint);
+            Canvas.DrawPath(shape.GetPath(), shape.Paint);
         }
     }
 
@@ -48,11 +44,11 @@ public class DrawService
 
     public void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        MouseLeftButtonDown = true;
+        /*MouseLeftButtonDown = true;
         MousePosition = GetMousePosition(sender, e);
         StartMousePosition = GetMousePosition(sender, e);
         // Перебираю элементы начиная с конца. Это важно!!!!
-        for (int i = _rectangles.Count - 1; i >= 0; i--)
+        for (int i = _shapes.Count - 1; i >= 0; i--)
         {
             var rect = _rectangles[i];
             if (MousePosition.X < rect.Point.X ||
@@ -68,7 +64,7 @@ public class DrawService
             return;
         }
         
-        CurrentRect = null;
+        CurrentRect = null;*/
     }
 
     public void OnMouseMove(object sender, MouseEventArgs e)
@@ -101,7 +97,7 @@ public class DrawService
 
     public bool CompleteTooltip(Point startMousePosition)
     {
-        if (!MousePosition.Equals(startMousePosition)) return false;
+        /*if (!MousePosition.Equals(startMousePosition)) return false;
         
         for (int i = _rectangles.Count - 1; i >= 0; i--)
         {
@@ -112,7 +108,7 @@ public class DrawService
                 MousePosition.Y > rect.Point.Y + rect.Height) continue;
             ToolTipService.Content = $"Rectangle {i+1}";
             return true;
-        }
+        }*/
         
         return false;
     }
