@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skiasharp_test_app", "skiasharp_test_app\skiasharp_test_app.csproj", "{4EBB617A-4F24-45DA-B4B4-37048D158930}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EBB617A-4F24-45DA-B4B4-37048D158930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EBB617A-4F24-45DA-B4B4-37048D158930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EBB617A-4F24-45DA-B4B4-37048D158930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EBB617A-4F24-45DA-B4B4-37048D158930}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
