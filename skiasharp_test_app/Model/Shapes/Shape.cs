@@ -10,7 +10,7 @@ public abstract class Shape
     
     public abstract SKPaint Paint { get; set; }
 
-    public abstract bool ContainsPoint();
+    public abstract bool ContainsPoint(SKPoint point);
 
     public abstract SKPath GetPath();
 }
