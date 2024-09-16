@@ -12,7 +12,23 @@ public class Resistor : Shape
     
     public override bool ContainsPoint(SKPoint point)
     {
-        throw new NotImplementedException();
+        // Левая палка
+        if (point.X >= X && point.X <= X + 20 && (int)point.Y == Y + 10)
+        {
+            return true;
+        }
+        // Прямоугольник
+        if (point.X >= X + 20 && point.X <= X + 80 && point.Y >= Y && point.Y <= Y + 20)
+        {
+            return true;
+        }
+        // Правая палка
+        if (point.X >= X + 80 && point.X <= X + 100 && (int)point.Y == Y + 10)
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     public override SKPath GetPath()
