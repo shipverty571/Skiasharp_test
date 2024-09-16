@@ -104,7 +104,7 @@ public class DrawService
             var shape = _shapes[i];
             if (!shape.ContainsPoint(MousePosition)) continue;
             
-            ToolTipService.Content = $"Rectangle {i+1}";
+            ToolTipService.Content = $"Shape {i+1}";
             return true;
         }
         

@@ -37,7 +37,7 @@ public partial class MainWindow : Window
                     {
                         Canvas.InvalidateVisual();
                     });
-                    _ = SpinWait.SpinUntil(() => false, 1000/140);
+                    _ = SpinWait.SpinUntil(() => false, 1);
                 }
                 catch
                 {
