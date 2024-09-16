@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Timers;
+using SkiaSharp;
 using Timer = System.Timers.Timer;
 
 namespace skiasharp_test_app.Model;
 
 public class ToolTipService
 {
-    private static Point _startMousePosition;
+    private static SKPoint _startMousePosition;
 
     private static Timer _timer;
 
@@ -32,7 +33,7 @@ public class ToolTipService
         _timer.Elapsed += CompleteTimer;
     }
     
-    public static Predicate<Point> Callback { get; set; }
+    public static Predicate<SKPoint> Callback { get; set; }
     
     public string Content { get; set; }
 
@@ -46,7 +47,7 @@ public class ToolTipService
         }
     }
     
-    public void StartTimer(Point startMousePosition)
+    public void StartTimer(SKPoint startMousePosition)
     {
         IsOpen = false;
         _startMousePosition = startMousePosition;
