@@ -3,7 +3,7 @@ using System.Timers;
 using SkiaSharp;
 using Timer = System.Timers.Timer;
 
-namespace skiasharp_test_app.Model;
+namespace skiasharp_test_app.Services;
 
 public class ToolTipService
 {

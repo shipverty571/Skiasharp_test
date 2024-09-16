@@ -20,7 +20,7 @@ public static class TestData
 
     public static List<Shape> GetShapes()
     {
-        if (_shapes.Count == 0)
+        /*if (_shapes.Count == 0)
         {
             var random = new Random();
             for (int i = 0; i < 100; i++)
@@ -32,12 +32,18 @@ public static class TestData
                 {
                     Style = SKPaintStyle.Stroke,
                     Color = SKColors.Black,
-                    StrokeWidth = 5
+                    StrokeWidth = 2
                 };
                 _shapes.Add(shape);
             }
         }
+        */
 
         return _shapes;
+    }
+
+    public static void Add(Shape shape)
+    {
+        _shapes.Add(shape);
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using skiasharp_test_app.Model;
+using skiasharp_test_app.Services;
 using skiasharp_test_app.ViewModel;
 using SkiaSharp.Views.Desktop;
-using ToolTipService = skiasharp_test_app.Model.ToolTipService;
+using ToolTipService = skiasharp_test_app.Services.ToolTipService;
 
 namespace skiasharp_test_app;
 

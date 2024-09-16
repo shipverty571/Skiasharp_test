@@ -13,12 +13,22 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <skia:SKElement
+            Grid.Row="0"
+            Grid.Column="1"
             Name="Canvas"
             MouseLeftButtonDown="Canvas_OnMouseLeftButtonDown"
             MouseLeftButtonUp="Canvas_OnMouseLeftButtonUp"
             MouseMove="Canvas_OnMouseMove"
             PaintSurface="Canvas_OnPaintSurface"/>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+            <Button Content="Resistor" Command="{Binding AddResistorCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>

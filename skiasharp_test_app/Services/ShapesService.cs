@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace skiasharp_test_app.Model;
+namespace skiasharp_test_app.Services;
 
 public static class ShapesService
 {

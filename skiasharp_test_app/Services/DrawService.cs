@@ -1,9 +1,10 @@
 ﻿using System.Windows.Input;
 using SkiaSharp;
+using skiasharp_test_app.Model;
 using skiasharp_test_app.Model.Shapes;
 using SkiaSharp.Views.WPF;
 
-namespace skiasharp_test_app.Model;
+namespace skiasharp_test_app.Services;
 
 public class DrawService
 {
@@ -30,7 +31,7 @@ public class DrawService
     public void Render(SKCanvas canvas)
     {
         Canvas = canvas;
-        Canvas.Clear(new SKColor(130, 130, 130));
+        Canvas.Clear(SKColors.White);
         foreach (var shape in _shapes)
         {
             Canvas.DrawPath(shape.GetPath(), shape.Paint);
@@ -54,8 +55,12 @@ public class DrawService
             var shape = _shapes[i];
             if (!shape.ContainsPoint(MousePosition)) continue;
             CurrentShape = shape;
-            _shapes.RemoveAt(i);
-            _shapes.Insert(_shapes.Count - 1, CurrentShape);
+            
+            if (_shapes.Count > 1)
+            {
+                _shapes.RemoveAt(i);
+                _shapes.Insert(_shapes.Count, CurrentShape);
+            }
 
             StartMousePosition = new SKPoint(
                 StartMousePosition.X - CurrentShape.X,
