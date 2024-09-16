@@ -1,10 +1,11 @@
 ﻿using SkiaSharp;
+using skiasharp_test_app.Model.Shapes;
 
 namespace skiasharp_test_app.Model;
 
 public static class TestData
 {
-    private static List<Rect> _rectangles = new List<Rect>();
+    private static List<Shape> _shapes = new List<Shape>();
 
     private static List<SKColor> _colors = new List<SKColor>
     {
@@ -17,22 +18,26 @@ public static class TestData
         SKColors.Black
     };
 
-    public static List<Rect> GetRectangles()
+    public static List<Shape> GetShapes()
     {
-        if (_rectangles.Count == 0)
+        if (_shapes.Count == 0)
         {
             var random = new Random();
             for (int i = 0; i < 100; i++)
             {
-                _rectangles.Add(new Rect(
-                    new Point(random.Next(0, 1000), random.Next(0, 1000)),
-                    50,
-                    50,
-                    new SKPaint{Color = _colors[random.Next(0, 7)]})
-                );
+                Shape shape = new Resistor();
+                shape.X = random.Next(0, 1000);
+                shape.Y = random.Next(0, 1000);
+                shape.Paint = new SKPaint
+                {
+                    Style = SKPaintStyle.Stroke,
+                    Color = SKColors.Black,
+                    StrokeWidth = 5
+                };
+                _shapes.Add(shape);
             }
         }
 
-        return _rectangles;
+        return _shapes;
     }
 }
