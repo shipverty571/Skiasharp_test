@@ -19,11 +19,11 @@ public class DrawService
     
     private bool MouseLeftButtonDown { get; set; }
     
-    private Point MousePosition { get; set; }
+    private SKPoint MousePosition { get; set; }
     
-    private Point StartMousePosition { get; set; }
+    private SKPoint StartMousePosition { get; set; }
     
-    private Rect? CurrentRect { get; set; } = null;
+    private Shape? CurrentShape { get; set; } = null;
     
     public ToolTipService ToolTipService { get; }
     
@@ -44,27 +44,26 @@ public class DrawService
 
     public void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
     {
-        /*MouseLeftButtonDown = true;
+        MouseLeftButtonDown = true;
         MousePosition = GetMousePosition(sender, e);
         StartMousePosition = GetMousePosition(sender, e);
+        
         // Перебираю элементы начиная с конца. Это важно!!!!
         for (int i = _shapes.Count - 1; i >= 0; i--)
         {
-            var rect = _rectangles[i];
-            if (MousePosition.X < rect.Point.X ||
-                MousePosition.X > rect.Point.X + rect.Width) continue;
-            if (MousePosition.Y < rect.Point.Y ||
-                MousePosition.Y > rect.Point.Y + rect.Height) continue;
-            CurrentRect = rect;
-            _rectangles.RemoveAt(i);
-            _rectangles.Insert(_rectangles.Count - 1, CurrentRect);
+            var shape = _shapes[i];
+            if (!shape.ContainsPoint(MousePosition)) continue;
+            CurrentShape = shape;
+            _shapes.RemoveAt(i);
+            _shapes.Insert(_shapes.Count - 1, CurrentShape);
 
-            StartMousePosition.X -= CurrentRect.Point.X;
-            StartMousePosition.Y -= CurrentRect.Point.Y;
+            StartMousePosition = new SKPoint(
+                StartMousePosition.X - CurrentShape.X,
+                StartMousePosition.Y - CurrentShape.Y);
             return;
         }
         
-        CurrentRect = null;*/
+        CurrentShape = null;
     }
 
     public void OnMouseMove(object sender, MouseEventArgs e)
@@ -73,42 +72,41 @@ public class DrawService
 
         if (!MouseLeftButtonDown)
         {
-            ToolTipService.StartTimer(new Point(MousePosition));
+            ToolTipService.StartTimer(MousePosition);
             return;
         }
-        if (CurrentRect is null) return;
+        if (CurrentShape is null) return;
 
         ToolTipService.IsOpen = false;
         var newX = MousePosition.X - StartMousePosition.X;
         var newY = MousePosition.Y - StartMousePosition.Y;
-        CurrentRect.Point = new Point(newX, newY);
+        CurrentShape.X = (int) newX;
+        CurrentShape.Y = (int) newY;
     }
     
-    private Point GetMousePosition(object sender, MouseEventArgs eventArgs)
+    private SKPoint GetMousePosition(object sender, MouseEventArgs eventArgs)
     {
         var pixelPosition = eventArgs.GetPosition(sender as SKElement);
         
-        return new Point
+        return new SKPoint
         {
             X = (int)pixelPosition.X,
             Y = (int)pixelPosition.Y
         };
     }
 
-    public bool CompleteTooltip(Point startMousePosition)
+    public bool CompleteTooltip(SKPoint startMousePosition)
     {
-        /*if (!MousePosition.Equals(startMousePosition)) return false;
+        if (!MousePosition.Equals(startMousePosition)) return false;
         
-        for (int i = _rectangles.Count - 1; i >= 0; i--)
+        for (int i = _shapes.Count - 1; i >= 0; i--)
         {
-            var rect = _rectangles[i];
-            if (MousePosition.X < rect.Point.X ||
-                MousePosition.X > rect.Point.X + rect.Width) continue;
-            if (MousePosition.Y < rect.Point.Y ||
-                MousePosition.Y > rect.Point.Y + rect.Height) continue;
+            var shape = _shapes[i];
+            if (!shape.ContainsPoint(MousePosition)) continue;
+            
             ToolTipService.Content = $"Rectangle {i+1}";
             return true;
-        }*/
+        }
         
         return false;
     }
