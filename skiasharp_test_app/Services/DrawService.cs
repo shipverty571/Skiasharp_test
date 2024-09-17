@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Drawing.Drawing2D;
+using System.Windows.Input;
 using SkiaSharp;
 using skiasharp_test_app.Model;
 using skiasharp_test_app.Model.Shapes;
@@ -35,6 +36,22 @@ public class DrawService
         foreach (var shape in _shapes)
         {
             Canvas.DrawPath(shape.GetPath(), shape.Paint);
+        }
+
+        if (CurrentShape != null)
+        {
+            var paint = new SKPaint
+            {
+                Style = SKPaintStyle.Stroke,
+                Color = SKColors.Firebrick,
+                StrokeWidth = 1
+            };
+            Canvas.DrawRect(
+                CurrentShape.X, 
+                CurrentShape.Y, 
+                CurrentShape.Width, 
+                CurrentShape.Height, 
+                paint);
         }
     }
 
