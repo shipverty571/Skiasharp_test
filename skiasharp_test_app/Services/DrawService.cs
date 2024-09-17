@@ -1,4 +1,5 @@
-﻿using System.Drawing.Drawing2D;
+﻿using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Windows.Input;
 using SkiaSharp;
 using skiasharp_test_app.Model;
@@ -33,6 +34,8 @@ public class DrawService
     {
         Canvas = canvas;
         Canvas.Clear(SKColors.White);
+        CreateCanvasDothField();
+        
         foreach (var shape in _shapes)
         {
             Canvas.DrawPath(shape.GetPath(), shape.Paint);
@@ -52,6 +55,25 @@ public class DrawService
                 CurrentShape.Width, 
                 CurrentShape.Height, 
                 paint);
+        }
+    }
+
+    private void CreateCanvasDothField()
+    {
+        var width = Canvas.DeviceClipBounds.Width;
+        var height = Canvas.DeviceClipBounds.Height;
+        var paint = new SKPaint
+        {
+            Style = SKPaintStyle.Fill,
+            Color = SKColors.DarkGray
+        };
+
+        for (int i = 0; i < width / 20 + 1; i++)
+        {
+            for (int j = 0; j < height / 20 + 1; j++)
+            {
+                Canvas.DrawCircle(i * 20, j * 20, 2, paint);
+            }
         }
     }
 
